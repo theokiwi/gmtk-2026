@@ -12,6 +12,9 @@ class Layer(IntEnum):
     NORMAL = 5
     INTERACTABLE = 6
     PLAYER = 7
+    DIGGABLE = 8
+    GRAPPLE_TARGET = 9
+    ROLL_BREAKABLE = 10
 
 
 class PhysicsBody:
@@ -55,6 +58,10 @@ class PhysicsSpace:
 
     def register_entity(self, shape, entity):
         self.entities[shape] = entity
+
+    def remove_shape(self, shape):
+        self.space.remove(shape.body, shape)
+        self.entities.pop(shape, None)
 
     def add_event(self, event):
         self.events.append(event)
